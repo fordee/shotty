@@ -16,7 +16,7 @@ def filter_instances(project):
 
 @click.group()
 def instances():
-    """Commands for instatnces"""
+    """Commands for instances"""
 
 @instances.command('list')
 @click.option('--project', default=None, help="Only instances for project (tag Project:<name>)")
@@ -38,7 +38,7 @@ def list_instances(project):
 
 @instances.command('stop')
 @click.option('--project', default=None, help="Only instances for project (tag Project:<name>)")
-def stop_imstamce(project):
+def stop_instance(project):
     "Stop EC2 Instances"
     instances = filter_instances(project)
 
@@ -49,13 +49,24 @@ def stop_imstamce(project):
 
 @instances.command('start')
 @click.option('--project', default=None, help="Only instances for project (tag Project:<name>)")
-def stop_imstamce(project):
+def start_instance(project):
     "Start EC2 Instances"
     instances = filter_instances(project)
 
     for i in instances:
         print("Starting {0}...".format(i.id))
         i.start()
+    return
+
+@instances.command('terminate')
+@click.option('--project', default=None, help="Only instances for project (tag Project:<name>)")
+def terminate_instance(project):
+    "Terminate EC2 Instances"
+    instances = filter_instances(project)
+
+    for i in instances:
+        print("Terminating {0}...".format(i.id))
+        i.terminate()
     return
 
 
