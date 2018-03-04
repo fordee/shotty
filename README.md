@@ -1,10 +1,10 @@
 # snapshotalyzer3000
 
-Utility to manage EC2 instances
+Utility to manage EC2 snapshots. Safely take snapshots of your EC2 instances.
 
 ## About
 
-An AWS utility that manages EC2 instances.
+An AWS utility that manages EC2 instances. Groups of instances can be handled together with the tag Project:<name>.
 
 ## Configuration
 
