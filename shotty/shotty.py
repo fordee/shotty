@@ -4,6 +4,7 @@ import click
 
 session = boto3.Session(profile_name='shotty')
 ec2 = session.resource('ec2')
+available_regions = session.get_available_regions('ec2')
 
 def filter_instances(project):
     instances = []
@@ -19,10 +20,26 @@ def has_pending_snapshot(volume):
     snapshots = list(volume.snapshots.all())
     return snapshots and snapshots[0].state == 'pending'
 
+def parse_region(region):
+    global session
+    global ec2
+
+    if not region:
+        return
+
+    if any(region in r for r in available_regions):
+        print("Region: {0}".format(region))
+        session = boto3.Session(profile_name='shotty', region_name=region)
+        ec2 = session.resource('ec2')
+    else:
+        print("Invalid region ({0}). Should be in: ".format(region) + ", ".join(available_regions))
+
 
 @click.group()
-def cli():
+@click.option('--region', default=None, help="Specify the region (otherwise default region is used)")
+def cli(region):
     """Shotty manages snapshots"""
+    parse_region(region)
 
 @cli.group('snapshots')
 def snapshots():
