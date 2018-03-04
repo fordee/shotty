@@ -4,7 +4,7 @@ Utility to manage EC2 snapshots. Safely take snapshots of your EC2 instances.
 
 ## About
 
-An AWS utility that manages EC2 instances. Groups of instances can be handled together with the tag Project:<name>.
+An AWS utility that manages EC2 instances. Groups of instances can be handled together with tag Project tags on your EC2 instances.
 
 ## Configuration
 
