@@ -1,4 +1,4 @@
-# snapshotalyzer3000
+# shotty
 
 Utility to manage EC2 snapshots. Safely take snapshots of your EC2 instances.
 
